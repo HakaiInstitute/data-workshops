@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Analysis and Visualization in R for Hakai Ecologists</title>
+  <meta name="description" content="This is the material for an introductory R workshop.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Analysis and Visualization in R for Hakai Ecologists" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is the material for an introductory R workshop." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Analysis and Visualization in R for Hakai Ecologists" />
+  
+  <meta name="twitter:description" content="This is the material for an introductory R workshop." />
+  
+
+<meta name="author" content="Data Carpentry, with modifcations by Brett Johnson">
+
+
+<meta name="date" content="2018-12-03">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="data-manipulation-using-dplyr-and-tidyr.html">
+<link rel="next" href="data-viz-ggplot2.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Analysis and Visualization in R for Ecologists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#chapters"><i class="fa fa-check"></i><b>1.1</b> Chapters</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#requirements"><i class="fa fa-check"></i><b>1.2</b> Requirements</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.2.1</b> Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#setup-instructions"><i class="fa fa-check"></i><b>1.2.2</b> Setup instructions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>1.3</b> Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="before-we-start.html"><a href="before-we-start.html"><i class="fa fa-check"></i><b>2</b> Before We Start</a><ul>
+<li class="chapter" data-level="2.1" data-path="before-we-start.html"><a href="before-we-start.html#what-is-r-what-is-rstudio"><i class="fa fa-check"></i><b>2.1</b> What is R? What is RStudio?</a></li>
+<li class="chapter" data-level="2.2" data-path="before-we-start.html"><a href="before-we-start.html#why-learn-r"><i class="fa fa-check"></i><b>2.2</b> Why learn R?</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="before-we-start.html"><a href="before-we-start.html#r-does-not-involve-lots-of-pointing-and-clicking-and-thats-a-good-thing"><i class="fa fa-check"></i><b>2.2.1</b> R does not involve lots of pointing and clicking, and that’s a good thing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="before-we-start.html"><a href="before-we-start.html#r-code-is-great-for-reproducibility"><i class="fa fa-check"></i><b>2.2.2</b> R code is great for reproducibility</a></li>
+<li class="chapter" data-level="2.2.3" data-path="before-we-start.html"><a href="before-we-start.html#r-is-interdisciplinary-and-extensible"><i class="fa fa-check"></i><b>2.2.3</b> R is interdisciplinary and extensible</a></li>
+<li class="chapter" data-level="2.2.4" data-path="before-we-start.html"><a href="before-we-start.html#r-works-on-data-of-all-shapes-and-sizes"><i class="fa fa-check"></i><b>2.2.4</b> R works on data of all shapes and sizes</a></li>
+<li class="chapter" data-level="2.2.5" data-path="before-we-start.html"><a href="before-we-start.html#r-produces-high-quality-graphics"><i class="fa fa-check"></i><b>2.2.5</b> R produces high-quality graphics</a></li>
+<li class="chapter" data-level="2.2.6" data-path="before-we-start.html"><a href="before-we-start.html#r-has-a-large-and-welcoming-community"><i class="fa fa-check"></i><b>2.2.6</b> R has a large and welcoming community</a></li>
+<li class="chapter" data-level="2.2.7" data-path="before-we-start.html"><a href="before-we-start.html#not-only-is-r-free-but-it-is-also-open-source-and-cross-platform"><i class="fa fa-check"></i><b>2.2.7</b> Not only is R free, but it is also open-source and cross-platform</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="before-we-start.html"><a href="before-we-start.html#knowing-your-way-around-rstudio"><i class="fa fa-check"></i><b>2.3</b> Knowing your way around RStudio</a></li>
+<li class="chapter" data-level="2.4" data-path="before-we-start.html"><a href="before-we-start.html#getting-set-up"><i class="fa fa-check"></i><b>2.4</b> Getting set up</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="before-we-start.html"><a href="before-we-start.html#organizing-your-working-directory"><i class="fa fa-check"></i><b>2.4.1</b> Organizing your working directory</a></li>
+<li class="chapter" data-level="2.4.2" data-path="before-we-start.html"><a href="before-we-start.html#the-working-directory"><i class="fa fa-check"></i><b>2.4.2</b> The working directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="before-we-start.html"><a href="before-we-start.html#interacting-with-r"><i class="fa fa-check"></i><b>2.5</b> Interacting with R</a></li>
+<li class="chapter" data-level="2.6" data-path="before-we-start.html"><a href="before-we-start.html#how-to-learn-more-after-the-workshop"><i class="fa fa-check"></i><b>2.6</b> How to learn more after the workshop?</a></li>
+<li class="chapter" data-level="2.7" data-path="before-we-start.html"><a href="before-we-start.html#seeking-help"><i class="fa fa-check"></i><b>2.7</b> Seeking help</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="before-we-start.html"><a href="before-we-start.html#use-the-built-in-rstudio-help-interface-to-search-for-more-information-on-r-functions"><i class="fa fa-check"></i><b>2.7.1</b> Use the built-in RStudio help interface to search for more information on R functions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="before-we-start.html"><a href="before-we-start.html#i-know-the-name-of-the-function-i-want-to-use-but-im-not-sure-how-to-use-it"><i class="fa fa-check"></i><b>2.7.2</b> I know the name of the function I want to use, but I’m not sure how to use it</a></li>
+<li class="chapter" data-level="2.7.3" data-path="before-we-start.html"><a href="before-we-start.html#i-want-to-use-a-function-that-does-x-there-must-be-a-function-for-it-but-i-dont-know-which-one"><i class="fa fa-check"></i><b>2.7.3</b> I want to use a function that does X, there must be a function for it but I don’t know which one…</a></li>
+<li class="chapter" data-level="2.7.4" data-path="before-we-start.html"><a href="before-we-start.html#i-am-stuck-i-get-an-error-message-that-i-dont-understand"><i class="fa fa-check"></i><b>2.7.4</b> I am stuck… I get an error message that I don’t understand</a></li>
+<li class="chapter" data-level="2.7.5" data-path="before-we-start.html"><a href="before-we-start.html#more-resources"><i class="fa fa-check"></i><b>2.7.5</b> More resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="intro-to-r.html"><a href="intro-to-r.html"><i class="fa fa-check"></i><b>3</b> Intro to R</a><ul>
+<li class="chapter" data-level="3.1" data-path="intro-to-r.html"><a href="intro-to-r.html#creating-objects-in-r"><i class="fa fa-check"></i><b>3.1</b> Creating objects in R</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="intro-to-r.html"><a href="intro-to-r.html#comments"><i class="fa fa-check"></i><b>3.1.1</b> Comments</a></li>
+<li class="chapter" data-level="3.1.2" data-path="intro-to-r.html"><a href="intro-to-r.html#functions-and-their-arguments"><i class="fa fa-check"></i><b>3.1.2</b> Functions and their arguments</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="intro-to-r.html"><a href="intro-to-r.html#vectors-and-data-types"><i class="fa fa-check"></i><b>3.2</b> Vectors and data types</a></li>
+<li class="chapter" data-level="3.3" data-path="intro-to-r.html"><a href="intro-to-r.html#subsetting-vectors"><i class="fa fa-check"></i><b>3.3</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="3.4" data-path="intro-to-r.html"><a href="intro-to-r.html#missing-data"><i class="fa fa-check"></i><b>3.4</b> Missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="starting-with-data.html"><a href="starting-with-data.html"><i class="fa fa-check"></i><b>4</b> Starting with Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="starting-with-data.html"><a href="starting-with-data.html#presentation-of-the-survey-data"><i class="fa fa-check"></i><b>4.1</b> Presentation of the Survey Data</a></li>
+<li class="chapter" data-level="4.2" data-path="starting-with-data.html"><a href="starting-with-data.html#what-are-data-frames"><i class="fa fa-check"></i><b>4.2</b> What are data frames?</a></li>
+<li class="chapter" data-level="4.3" data-path="starting-with-data.html"><a href="starting-with-data.html#inspecting-data.frame-objects"><i class="fa fa-check"></i><b>4.3</b> Inspecting <code>data.frame</code> Objects</a></li>
+<li class="chapter" data-level="4.4" data-path="starting-with-data.html"><a href="starting-with-data.html#indexing-and-subsetting-data-frames"><i class="fa fa-check"></i><b>4.4</b> Indexing and subsetting data frames</a></li>
+<li class="chapter" data-level="4.5" data-path="starting-with-data.html"><a href="starting-with-data.html#formatting-dates"><i class="fa fa-check"></i><b>4.5</b> Formatting Dates</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="starting-with-data.html"><a href="starting-with-data.html#manipulating-and-analyzing-data-with-dplyr"><i class="fa fa-check"></i><b>4.5.1</b> Manipulating and analyzing data with dplyr</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-manipulation-using-dplyr-and-tidyr.html"><a href="data-manipulation-using-dplyr-and-tidyr.html"><i class="fa fa-check"></i><b>5</b> Data Manipulation using <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong></a><ul>
+<li class="chapter" data-level="5.1" data-path="data-manipulation-using-dplyr-and-tidyr.html"><a href="data-manipulation-using-dplyr-and-tidyr.html#what-are-dplyr-and-tidyr"><i class="fa fa-check"></i><b>5.1</b> What are <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong>?</a></li>
+<li class="chapter" data-level="5.2" data-path="data-manipulation-using-dplyr-and-tidyr.html"><a href="data-manipulation-using-dplyr-and-tidyr.html#selecting-columns-and-filtering-rows"><i class="fa fa-check"></i><b>5.2</b> Selecting columns and filtering rows</a></li>
+<li class="chapter" data-level="5.3" data-path="data-manipulation-using-dplyr-and-tidyr.html"><a href="data-manipulation-using-dplyr-and-tidyr.html#pipes"><i class="fa fa-check"></i><b>5.3</b> Pipes</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="data-manipulation-using-dplyr-and-tidyr.html"><a href="data-manipulation-using-dplyr-and-tidyr.html#mutate"><i class="fa fa-check"></i><b>5.3.1</b> Mutate</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-manipulation-using-dplyr-and-tidyr.html"><a href="data-manipulation-using-dplyr-and-tidyr.html#the-summarize-function"><i class="fa fa-check"></i><b>5.3.2</b> The <code>summarize()</code> function</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-manipulation-using-dplyr-and-tidyr.html"><a href="data-manipulation-using-dplyr-and-tidyr.html#counting"><i class="fa fa-check"></i><b>5.3.3</b> Counting</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-manipulation-using-dplyr-and-tidyr.html"><a href="data-manipulation-using-dplyr-and-tidyr.html#reshaping-with-gather-and-spread"><i class="fa fa-check"></i><b>5.3.4</b> Reshaping with gather and spread</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="exporting-data.html"><a href="exporting-data.html"><i class="fa fa-check"></i><b>6</b> Exporting data</a><ul>
+<li class="chapter" data-level="6.1" data-path="exporting-data.html"><a href="exporting-data.html#factors"><i class="fa fa-check"></i><b>6.1</b> Factors</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="exporting-data.html"><a href="exporting-data.html#the-forcats-package"><i class="fa fa-check"></i><b>6.1.1</b> The forcats Package</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html"><i class="fa fa-check"></i><b>7</b> Data Viz: ggplot2</a><ul>
+<li class="chapter" data-level="7.1" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#plotting-with-ggplot2"><i class="fa fa-check"></i><b>7.1</b> Plotting with <strong><code>ggplot2</code></strong></a></li>
+<li class="chapter" data-level="7.2" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#building-your-plots-iteratively"><i class="fa fa-check"></i><b>7.2</b> Building your plots iteratively</a></li>
+<li class="chapter" data-level="7.3" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#boxplot"><i class="fa fa-check"></i><b>7.3</b> Boxplot</a></li>
+<li class="chapter" data-level="7.4" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#plotting-time-series-data"><i class="fa fa-check"></i><b>7.4</b> Plotting time series data</a></li>
+<li class="chapter" data-level="7.5" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#faceting"><i class="fa fa-check"></i><b>7.5</b> Faceting</a></li>
+<li class="chapter" data-level="7.6" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#ggplot2-themes"><i class="fa fa-check"></i><b>7.6</b> <strong><code>ggplot2</code></strong> themes</a></li>
+<li class="chapter" data-level="7.7" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#customization"><i class="fa fa-check"></i><b>7.7</b> Customization</a></li>
+<li class="chapter" data-level="7.8" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#arranging-and-exporting-plots"><i class="fa fa-check"></i><b>7.8</b> Arranging and exporting plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="hakai-data-portal-api.html"><a href="hakai-data-portal-api.html"><i class="fa fa-check"></i><b>8</b> Hakai Data Portal API</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis and Visualization in R for Hakai Ecologists</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exporting-data" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Exporting data</h1>
+<p>Now that you have learned how to use <strong><code>dplyr</code></strong> to extract information from or summarize your raw data, you may want to export these new data sets to share them with your collaborators or for archival.</p>
+<p>Similar to the <code>read_csv()</code> function used for reading CSV files into R, there is a <code>write_csv()</code> function that generates CSV files from data frames.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write_csv</span>(surveys_spread, <span class="st">&quot;data/surveys_spread.csv&quot;</span>)</code></pre></div>
+<div id="factors" class="section level2">
+<h2><span class="header-section-number">6.1</span> Factors</h2>
+<p>This section is from Jenny Bryan’s course at UBC: Stat 545</p>
+<p>Factors are the variable type that useRs love to hate. It is how we store truly categorical information in R. The values a factor can take on are called the levels. In general, the levels are friendly human-readable character strings, like “male/female” and “control/treated”. But never ever ever forget that, under the hood, R is really storing integer codes 1, 2, 3, etc.</p>
+<p>This Janus-like nature of factors means they are rich with booby traps for the unsuspecting but they are a necessary evil. I recommend you learn how to be the boss of your factors. The pros far outweigh the cons. Specifically in modelling and figure-making, factors are anticipated and accommodated by the functions and packages you will want to exploit.</p>
+<p>The worst kind of factor is the stealth factor. The variable that you think of as character, but that is actually a factor (numeric!!). This is a classic R gotcha. Check your variable types explicitly when things seem weird. It happens to the best of us.</p>
+<p>Where do stealth factors come from? Base R has a burning desire to turn character information into factor. The happens most commonly at data import via read.csv() and friends. But data.frame() and other functions are also eager to convert character to factor. To shut this down, use stringsAsFactors = FALSE in read.csv() and data.frame() or – even better – use the tidyverse! For data import, use readr::read_csv(), readr::read_tsv(), etc. For data frame creation, use tibble::tibble(). And so on.</p>
+<p>See for yourself the difference in how strings are treated with the two different methods of reading a csv file.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys. &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/surveys.csv&quot;</span>)
+surveys_ &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/surveys.csv&quot;</span>)</code></pre></div>
+<pre><code>#&gt; Parsed with column specification:
+#&gt; cols(
+#&gt;   record_id = col_integer(),
+#&gt;   month = col_integer(),
+#&gt;   day = col_integer(),
+#&gt;   year = col_integer(),
+#&gt;   plot_id = col_integer(),
+#&gt;   species_id = col_character(),
+#&gt;   sex = col_character(),
+#&gt;   hindfoot_length = col_integer(),
+#&gt;   weight = col_integer()
+#&gt; )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys.)
+<span class="kw">str</span>(surveys_)</code></pre></div>
+<div id="the-forcats-package" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> The forcats Package</h3>
+<p>forcats is a core package in the tidyverse. It is installed via <code>install.packages(&quot;tidyverse&quot;)</code> and attached via <code>library(tidyverse)</code>. You can always load it individually via <code>library(forcats)</code>. Main functions start with fct_. There really is no coherent family of base functions that forcats replaces – that’s why it’s such a welcome addition.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(forcats)
+
+
+<span class="kw">library</span>(gapminder)</code></pre></div>
+<p>Get to know your factor before you start touching it! It’s polite. Let’s use gapminder$continent as our example.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gapminder<span class="op">$</span>continent)
+<span class="kw">levels</span>(gapminder<span class="op">$</span>continent)
+<span class="kw">nlevels</span>(gapminder<span class="op">$</span>continent)
+<span class="kw">class</span>(gapminder<span class="op">$</span>continent)</code></pre></div>
+<p>To get a frequency table as a tibble, from a tibble, use dplyr::count(). To get similar from a free-range factor, use forcats::fct_count().</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(continent)
+
+<span class="kw">fct_count</span>(gapminder<span class="op">$</span>continent)</code></pre></div>
+<div id="dropping-unused-levels" class="section level4">
+<h4><span class="header-section-number">6.1.1.1</span> Dropping unused levels:</h4>
+<p>Just because you drop all the rows corresponding to a specific factor level, the levels of the factor itself do not change. Sometimes all these unused levels can come back to haunt you later, e.g., in figure legends.</p>
+<p>Watch what happens to the levels of country (= nothing) when we filter Gapminder to a handful of countries.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nlevels</span>(gapminder<span class="op">$</span>country)
+
+h_countries &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Egypt&quot;</span>, <span class="st">&quot;Haiti&quot;</span>, <span class="st">&quot;Romania&quot;</span>, <span class="st">&quot;Thailand&quot;</span>, <span class="st">&quot;Venezuela&quot;</span>)
+
+h_gap &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span>h_countries)
+
+<span class="kw">nlevels</span>(h_gap<span class="op">$</span>country)</code></pre></div>
+<p>Even though <code>h_gap</code> only has data for a handful of countries, we are still schlepping around all 142 levels from the original gapminder tibble.</p>
+<p>How can you get rid of them? The base function <code>droplevels()</code> operates on all the factors in a data frame or on a single factor. The function <code>forcats::fct_drop()</code> operates on a factor.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h_gap_dropped &lt;-<span class="st"> </span>h_gap <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">droplevels</span>()
+<span class="kw">nlevels</span>(h_gap_dropped<span class="op">$</span>country)
+
+h_gap<span class="op">$</span>country <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">fct_drop</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">levels</span>()</code></pre></div>
+</div>
+<div id="change-order-of-the-levels-principled" class="section level4">
+<h4><span class="header-section-number">6.1.1.2</span> Change order of the levels, principled</h4>
+<p>By default, factor levels are ordered alphabetically. Which might as well be random, when you think about it! It is preferable to order the levels according to some principle:</p>
+<ul>
+<li>Frequency.Make the most common level the first and so on.</li>
+<li>Another variable. Order factor levels according to a summary statistic for another variable. Example: order Gapminder countries by life expectancy.</li>
+</ul>
+<p>First, let’s order continent by frequency, forwards and backwards. This is often a great idea for tables and figures, esp. frequency barplots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## default order is alphabetical
+gapminder<span class="op">$</span>continent <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">levels</span>()
+
+## order by frequency
+gapminder<span class="op">$</span>continent <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fct_infreq</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">levels</span>()
+
+## backwards!
+gapminder<span class="op">$</span>continent <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fct_infreq</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">fct_rev</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">levels</span>()
+
+## order countries by median life expectancy
+<span class="kw">fct_reorder</span>(gapminder<span class="op">$</span>country, gapminder<span class="op">$</span>lifeExp) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">levels</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</code></pre></div>
+</div>
+<div id="change-order-of-the-levels-because-i-said-so" class="section level4">
+<h4><span class="header-section-number">6.1.1.3</span> Change order of the levels, “because I said so”</h4>
+<p>Sometimes you just want to hoist one or more levels to the front. Why? Because I said so.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h_gap<span class="op">$</span>country <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()
+
+h_gap<span class="op">$</span>country <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fct_relevel</span>(<span class="st">&quot;Romania&quot;</span>, <span class="st">&quot;Haiti&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</code></pre></div>
+<p>This might be useful if you are preparing a report for, say, the Romanian government. The reason for always putting Romania first has nothing to do with the data, it is important for external reasons and you need a way to express this.</p>
+</div>
+<div id="recode-the-levels" class="section level4">
+<h4><span class="header-section-number">6.1.1.4</span> Recode the levels</h4>
+<p>Sometimes you have better ideas about what certain levels should be. This is called recoding.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">i_gap &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;United States&quot;</span>, <span class="st">&quot;Sweden&quot;</span>, <span class="st">&quot;Australia&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">droplevels</span>()
+
+i_gap<span class="op">$</span>country <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()
+
+i_gap<span class="op">$</span>country <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">fct_recode</span>(<span class="st">&quot;USA&quot;</span> =<span class="st"> &quot;United States&quot;</span>, <span class="st">&quot;Oz&quot;</span> =<span class="st"> &quot;Australia&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</code></pre></div>
+<p>Exercise: Isolate the data for “Australia”, “Korea, Dem. Rep.”, and “Korea, Rep.” in the 2000x. Revalue the country factor levels to “Oz”, “North Korea”, and “South Korea”.</p>
+
+<hr />
+<blockquote>
+<h3 id="learning-objectives-4"><span class="header-section-number">6.1.1.4</span> Learning Objectives</h3>
+<ul>
+<li>Produce scatter plots, boxplots, and time series plots using ggplot.</li>
+<li>Set universal plot settings.</li>
+<li>Describe what faceting is and apply faceting in ggplot.</li>
+<li>Modify the aesthetics of an existing ggplot plot (including axis labels and color).</li>
+<li>Build complex and customized plots from data in a data frame.</li>
+</ul>
+</blockquote>
+<hr />
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-manipulation-using-dplyr-and-tidyr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-viz-ggplot2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["R-Intro-Hakai.pdf", "R-Intro-Hakai.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

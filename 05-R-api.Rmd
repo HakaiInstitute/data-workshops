@@ -1,0 +1,48 @@
+---
+title: R and the Hakai Database
+author: Brett Johnson
+minutes: 30
+---
+
+# Hakai Data Portal API
+
+Often your data source changes over time as new data are added, or as errors are corrected. It can be a pain to go somewhere to re-download a data file, put the data in the right place, and then re-run your code.
+
+It is possible to download data from the Hakai EIMS Data Portal database directly from R Studio. This is accomplished by interacting with an application programming interface (API) that was developed for downloading data from Hakai's data portal.
+
+Below is a quickstart example of how you can download some chlorophyll data. Run the code below one line at a time. When you run the `client <- ...` line a web URL will be displayed in the console. Copy and paste that URL into your browser. This should take to you a webpage that displays another web URL, this is your authentication token that permits you access to the database. Copy and paste the URL into the console in R where it tells you to do so.
+
+
+```
+# Run this first line only if you haven't installedt the R API before
+devtools::install_github("HakaiInstitute/hakai-api-client-r", subdir='hakaiApi')
+
+library('hakaiApi')
+
+# Run this line independently before the rest of the code to get the API authentication
+client <- hakaiApi::Client$new() # Follow stdout prompts to get an API token
+
+# Make a data request for chlorophyll data
+endpoint <- sprintf("%s/%s", client$api_root, "eims/views/output/chlorophyll?limit=50")
+data <- client$get(endpoint)
+
+# Print out the data
+print(data)
+```
+
+By running this code you should see chlorophyll data in your environment. 
+The above code can be modified to select different datasets other than chlorophyll and filter based on different logical parameters you set. This is accomplished by editing the text after the ? in `"eims/views/output/chlorophyll?limit=50"`.
+
+The formula you set after the question mark is known as query string filtering. To learn how to filter your data [read this](https://github.com/HakaiInstitute/hakai-api/blob/master/docs/querying-data.md). 
+
+To read generally about the API and how to use it for your first time [go here](https://github.com/HakaiInstitute/hakai-api/blob/master/docs/simplified-api-documentation.md#what-is-the-hakai-api).
+
+If you don't want to learn how to write a querystring yourself there is an option to just copy and paste the querystring from the [EIMS Data Portal](https://hecate.hakai.org/portal2/). Use the portal to select the sample type, and dates and sites you'd like to download as you normally would. To copy the querystring go to the top right of the window where it says Options and click 'Display API query'. You can copy that string in to your endpoint definition in R. Just be sure to copy that string starting from `eims/views/...`, excluding `https://hecate.hakai.org/api/` and then paste that into the definitions of your endpoint and surround that string with single quotes, ie: 
+
+```
+endpoint <- sprintf("%s/%s", client$api_root, 'eims/views/output/chlorophyll?date>=2016-11-01&date<2018-11-20&work_area&&{"CALVERT"}&site_id&&{"KC13","MG4"}&survey&&{"KWAK","MACRO_MGEO"}&limit=-1'
+```
+
+Make sure to add &limit=-1 at the end of your query string so that not only the first 20 results are downloaded, but rather everything matching your query string is downloaded.
+
+The page documenting the API usage can be found [here](https://hakaiinstitute.github.io/hakai-api/)

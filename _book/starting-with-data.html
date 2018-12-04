@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Analysis and Visualization in R for Hakai Ecologists</title>
+  <meta name="description" content="This is the material for an introductory R workshop.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Analysis and Visualization in R for Hakai Ecologists" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is the material for an introductory R workshop." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Analysis and Visualization in R for Hakai Ecologists" />
+  
+  <meta name="twitter:description" content="This is the material for an introductory R workshop." />
+  
+
+<meta name="author" content="Data Carpentry (with modifcations)">
+
+
+<meta name="date" content="2018-12-04">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="intro-to-r.html">
+<link rel="next" href="manipulating-and-analyzing-data-with-dplyr.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Analysis and Visualization in R for Ecologists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#chapters"><i class="fa fa-check"></i><b>1.1</b> Chapters</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#requirements"><i class="fa fa-check"></i><b>1.2</b> Requirements</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#setup-instructions"><i class="fa fa-check"></i><b>1.2.1</b> Setup instructions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>1.3</b> Contributors</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="before-we-start.html"><a href="before-we-start.html"><i class="fa fa-check"></i><b>2</b> Before We Start</a><ul>
+<li class="chapter" data-level="2.1" data-path="before-we-start.html"><a href="before-we-start.html#what-is-r-what-is-rstudio"><i class="fa fa-check"></i><b>2.1</b> What is R? What is RStudio?</a></li>
+<li class="chapter" data-level="2.2" data-path="before-we-start.html"><a href="before-we-start.html#why-learn-r"><i class="fa fa-check"></i><b>2.2</b> Why learn R?</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="before-we-start.html"><a href="before-we-start.html#r-does-not-involve-lots-of-pointing-and-clicking-and-thats-a-good-thing"><i class="fa fa-check"></i><b>2.2.1</b> R does not involve lots of pointing and clicking, and that’s a good thing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="before-we-start.html"><a href="before-we-start.html#r-code-is-great-for-reproducibility"><i class="fa fa-check"></i><b>2.2.2</b> R code is great for reproducibility</a></li>
+<li class="chapter" data-level="2.2.3" data-path="before-we-start.html"><a href="before-we-start.html#r-is-interdisciplinary-and-extensible"><i class="fa fa-check"></i><b>2.2.3</b> R is interdisciplinary and extensible</a></li>
+<li class="chapter" data-level="2.2.4" data-path="before-we-start.html"><a href="before-we-start.html#r-works-on-data-of-all-shapes-and-sizes"><i class="fa fa-check"></i><b>2.2.4</b> R works on data of all shapes and sizes</a></li>
+<li class="chapter" data-level="2.2.5" data-path="before-we-start.html"><a href="before-we-start.html#r-produces-high-quality-graphics"><i class="fa fa-check"></i><b>2.2.5</b> R produces high-quality graphics</a></li>
+<li class="chapter" data-level="2.2.6" data-path="before-we-start.html"><a href="before-we-start.html#r-has-a-large-and-welcoming-community"><i class="fa fa-check"></i><b>2.2.6</b> R has a large and welcoming community</a></li>
+<li class="chapter" data-level="2.2.7" data-path="before-we-start.html"><a href="before-we-start.html#not-only-is-r-free-but-it-is-also-open-source-and-cross-platform"><i class="fa fa-check"></i><b>2.2.7</b> Not only is R free, but it is also open-source and cross-platform</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="before-we-start.html"><a href="before-we-start.html#knowing-your-way-around-rstudio"><i class="fa fa-check"></i><b>2.3</b> Knowing your way around RStudio</a></li>
+<li class="chapter" data-level="2.4" data-path="before-we-start.html"><a href="before-we-start.html#getting-set-up"><i class="fa fa-check"></i><b>2.4</b> Getting set up</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="before-we-start.html"><a href="before-we-start.html#organizing-your-working-directory"><i class="fa fa-check"></i><b>2.4.1</b> Organizing your working directory</a></li>
+<li class="chapter" data-level="2.4.2" data-path="before-we-start.html"><a href="before-we-start.html#the-working-directory"><i class="fa fa-check"></i><b>2.4.2</b> The working directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="before-we-start.html"><a href="before-we-start.html#interacting-with-r"><i class="fa fa-check"></i><b>2.5</b> Interacting with R</a></li>
+<li class="chapter" data-level="2.6" data-path="before-we-start.html"><a href="before-we-start.html#how-to-learn-more-after-the-workshop"><i class="fa fa-check"></i><b>2.6</b> How to learn more after the workshop?</a></li>
+<li class="chapter" data-level="2.7" data-path="before-we-start.html"><a href="before-we-start.html#seeking-help"><i class="fa fa-check"></i><b>2.7</b> Seeking help</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="before-we-start.html"><a href="before-we-start.html#use-the-built-in-rstudio-help-interface-to-search-for-more-information-on-r-functions"><i class="fa fa-check"></i><b>2.7.1</b> Use the built-in RStudio help interface to search for more information on R functions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="before-we-start.html"><a href="before-we-start.html#i-know-the-name-of-the-function-i-want-to-use-but-im-not-sure-how-to-use-it"><i class="fa fa-check"></i><b>2.7.2</b> I know the name of the function I want to use, but I’m not sure how to use it</a></li>
+<li class="chapter" data-level="2.7.3" data-path="before-we-start.html"><a href="before-we-start.html#i-want-to-use-a-function-that-does-x-there-must-be-a-function-for-it-but-i-dont-know-which-one"><i class="fa fa-check"></i><b>2.7.3</b> I want to use a function that does X, there must be a function for it but I don’t know which one…</a></li>
+<li class="chapter" data-level="2.7.4" data-path="before-we-start.html"><a href="before-we-start.html#i-am-stuck-i-get-an-error-message-that-i-dont-understand"><i class="fa fa-check"></i><b>2.7.4</b> I am stuck… I get an error message that I don’t understand</a></li>
+<li class="chapter" data-level="2.7.5" data-path="before-we-start.html"><a href="before-we-start.html#more-resources"><i class="fa fa-check"></i><b>2.7.5</b> More resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="intro-to-r.html"><a href="intro-to-r.html"><i class="fa fa-check"></i><b>3</b> Intro to R</a><ul>
+<li class="chapter" data-level="3.1" data-path="intro-to-r.html"><a href="intro-to-r.html#creating-objects-in-r"><i class="fa fa-check"></i><b>3.1</b> Creating objects in R</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="intro-to-r.html"><a href="intro-to-r.html#comments"><i class="fa fa-check"></i><b>3.1.1</b> Comments</a></li>
+<li class="chapter" data-level="3.1.2" data-path="intro-to-r.html"><a href="intro-to-r.html#functions-and-their-arguments"><i class="fa fa-check"></i><b>3.1.2</b> Functions and their arguments</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="intro-to-r.html"><a href="intro-to-r.html#vectors-and-data-types"><i class="fa fa-check"></i><b>3.2</b> Vectors and data types</a></li>
+<li class="chapter" data-level="3.3" data-path="intro-to-r.html"><a href="intro-to-r.html#subsetting-vectors"><i class="fa fa-check"></i><b>3.3</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="3.4" data-path="intro-to-r.html"><a href="intro-to-r.html#missing-data"><i class="fa fa-check"></i><b>3.4</b> Missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="starting-with-data.html"><a href="starting-with-data.html"><i class="fa fa-check"></i><b>4</b> Starting with Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="starting-with-data.html"><a href="starting-with-data.html#presentation-of-the-survey-data"><i class="fa fa-check"></i><b>4.1</b> Presentation of the Survey Data</a></li>
+<li class="chapter" data-level="4.2" data-path="starting-with-data.html"><a href="starting-with-data.html#what-are-data-frames"><i class="fa fa-check"></i><b>4.2</b> What are data frames?</a></li>
+<li class="chapter" data-level="4.3" data-path="starting-with-data.html"><a href="starting-with-data.html#inspecting-data.frame-objects"><i class="fa fa-check"></i><b>4.3</b> Inspecting <code>data.frame</code> Objects</a></li>
+<li class="chapter" data-level="4.4" data-path="starting-with-data.html"><a href="starting-with-data.html#indexing-and-subsetting-data-frames"><i class="fa fa-check"></i><b>4.4</b> Indexing and subsetting data frames</a></li>
+<li class="chapter" data-level="4.5" data-path="starting-with-data.html"><a href="starting-with-data.html#formatting-dates"><i class="fa fa-check"></i><b>4.5</b> Formatting Dates</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="starting-with-data.html"><a href="starting-with-data.html#introduction-1"><i class="fa fa-check"></i><b>4.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.5.2" data-path="starting-with-data.html"><a href="starting-with-data.html#prerequisites"><i class="fa fa-check"></i><b>4.5.2</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="starting-with-data.html"><a href="starting-with-data.html#creating-datetimes"><i class="fa fa-check"></i><b>4.6</b> Creating date/times</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="starting-with-data.html"><a href="starting-with-data.html#from-strings"><i class="fa fa-check"></i><b>4.6.1</b> From strings</a></li>
+<li class="chapter" data-level="4.6.2" data-path="starting-with-data.html"><a href="starting-with-data.html#from-other-types"><i class="fa fa-check"></i><b>4.6.2</b> From other types</a></li>
+<li class="chapter" data-level="4.6.3" data-path="starting-with-data.html"><a href="starting-with-data.html#exercises"><i class="fa fa-check"></i><b>4.6.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="starting-with-data.html"><a href="starting-with-data.html#date-time-components"><i class="fa fa-check"></i><b>4.7</b> Date-time components</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="starting-with-data.html"><a href="starting-with-data.html#getting-components"><i class="fa fa-check"></i><b>4.7.1</b> Getting components</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="starting-with-data.html"><a href="starting-with-data.html#time-spans"><i class="fa fa-check"></i><b>4.8</b> Time spans</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="starting-with-data.html"><a href="starting-with-data.html#durations"><i class="fa fa-check"></i><b>4.8.1</b> Durations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html"><i class="fa fa-check"></i><b>5</b> Manipulating and analyzing data with dplyr</a><ul>
+<li class="chapter" data-level="5.1" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html#data-manipulation-using-dplyr-and-tidyr"><i class="fa fa-check"></i><b>5.1</b> Data Manipulation using <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong></a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html#what-are-dplyr-and-tidyr"><i class="fa fa-check"></i><b>5.2</b> What are <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong>?</a></li>
+<li class="chapter" data-level="5.3" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html#selecting-columns-and-filtering-rows"><i class="fa fa-check"></i><b>5.3</b> Selecting columns and filtering rows</a></li>
+<li class="chapter" data-level="5.4" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html#pipes"><i class="fa fa-check"></i><b>5.4</b> Pipes</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html#mutate"><i class="fa fa-check"></i><b>5.4.1</b> Mutate</a></li>
+<li class="chapter" data-level="5.4.2" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html#the-summarize-function"><i class="fa fa-check"></i><b>5.4.2</b> The <code>summarize()</code> function</a></li>
+<li class="chapter" data-level="5.4.3" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html#counting"><i class="fa fa-check"></i><b>5.4.3</b> Counting</a></li>
+<li class="chapter" data-level="5.4.4" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html#reshaping-with-gather-and-spread"><i class="fa fa-check"></i><b>5.4.4</b> Reshaping with gather and spread</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html#exporting-data"><i class="fa fa-check"></i><b>5.5</b> Exporting data</a></li>
+<li class="chapter" data-level="5.6" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html#factors"><i class="fa fa-check"></i><b>5.6</b> Factors</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="manipulating-and-analyzing-data-with-dplyr.html"><a href="manipulating-and-analyzing-data-with-dplyr.html#the-forcats-package"><i class="fa fa-check"></i><b>5.6.1</b> The forcats Package</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html"><i class="fa fa-check"></i><b>6</b> Data Viz: ggplot2</a><ul>
+<li class="chapter" data-level="6.1" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#plotting-with-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Plotting with <strong><code>ggplot2</code></strong></a></li>
+<li class="chapter" data-level="6.2" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#building-your-plots-iteratively"><i class="fa fa-check"></i><b>6.2</b> Building your plots iteratively</a></li>
+<li class="chapter" data-level="6.3" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#boxplot"><i class="fa fa-check"></i><b>6.3</b> Boxplot</a></li>
+<li class="chapter" data-level="6.4" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#plotting-time-series-data"><i class="fa fa-check"></i><b>6.4</b> Plotting time series data</a></li>
+<li class="chapter" data-level="6.5" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#faceting"><i class="fa fa-check"></i><b>6.5</b> Faceting</a></li>
+<li class="chapter" data-level="6.6" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#ggplot2-themes"><i class="fa fa-check"></i><b>6.6</b> <strong><code>ggplot2</code></strong> themes</a></li>
+<li class="chapter" data-level="6.7" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#customization"><i class="fa fa-check"></i><b>6.7</b> Customization</a></li>
+<li class="chapter" data-level="6.8" data-path="data-viz-ggplot2.html"><a href="data-viz-ggplot2.html#arranging-and-exporting-plots"><i class="fa fa-check"></i><b>6.8</b> Arranging and exporting plots</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="hakai-data-portal-api.html"><a href="hakai-data-portal-api.html"><i class="fa fa-check"></i><b>7</b> Hakai Data Portal API</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis and Visualization in R for Hakai Ecologists</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="starting-with-data" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Starting with Data</h1>
+<hr />
+<blockquote>
+<h3 id="learning-objectives-2"><span class="header-section-number">4</span> Learning Objectives</h3>
+<ul>
+<li>Describe what a data frame is.</li>
+<li>Load external data from a .csv file into a data frame.</li>
+<li>Summarize the contents of a data frame.</li>
+<li>Format dates.</li>
+</ul>
+</blockquote>
+<hr />
+<div id="presentation-of-the-survey-data" class="section level2">
+<h2><span class="header-section-number">4.1</span> Presentation of the Survey Data</h2>
+<p>We are studying the species repartition and weight of animals caught in plots in our study area. The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>record_id</td>
+<td>Unique id for the observation</td>
+</tr>
+<tr class="even">
+<td>month</td>
+<td>month of observation</td>
+</tr>
+<tr class="odd">
+<td>day</td>
+<td>day of observation</td>
+</tr>
+<tr class="even">
+<td>year</td>
+<td>year of observation</td>
+</tr>
+<tr class="odd">
+<td>plot_id</td>
+<td>ID of a particular plot</td>
+</tr>
+<tr class="even">
+<td>species_id</td>
+<td>2-letter code</td>
+</tr>
+<tr class="odd">
+<td>sex</td>
+<td>sex of animal (“M”, “F”)</td>
+</tr>
+<tr class="even">
+<td>hindfoot_length</td>
+<td>length of the hindfoot in mm</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>weight of the animal in grams</td>
+</tr>
+<tr class="even">
+<td>genus</td>
+<td>genus of animal</td>
+</tr>
+<tr class="odd">
+<td>species</td>
+<td>species of animal</td>
+</tr>
+<tr class="even">
+<td>taxon</td>
+<td>e.g. Rodent, Reptile, Bird, Rabbit</td>
+</tr>
+<tr class="odd">
+<td>plot_type</td>
+<td>type of plot</td>
+</tr>
+</tbody>
+</table>
+<p>We are going to use the R function <code>download.file()</code> to download the CSV file that contains the survey data from figshare, and we will use <code>read_csv()</code> to load into memory the content of the CSV file as an object of class <code>data.frame</code>. Inside the download.file command, the first entry is a character string with the source URL (“<a href="https://ndownloader.figshare.com/files/2292169" class="uri">https://ndownloader.figshare.com/files/2292169</a>”). This source URL downloads a CSV file from figshare. The text after the comma (“data/portal_data_joined.csv”) is the destination of the file on your local machine. You’ll need to have a folder on your machine called “data” where you’ll download the file. So this command downloads a file from figshare, names it “portal_data_joined.csv,” and adds it to a preexisting folder named “data.”</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+
+<span class="kw">download.file</span>(<span class="dt">url=</span><span class="st">&quot;https://ndownloader.figshare.com/files/2292169&quot;</span>,
+              <span class="dt">destfile =</span> <span class="st">&quot;data/portal_data_joined.csv&quot;</span>)<span class="er">)</span></code></pre></div>
+<p>You are now ready to load the data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>)</code></pre></div>
+<pre><code>#&gt; Parsed with column specification:
+#&gt; cols(
+#&gt;   record_id = col_integer(),
+#&gt;   month = col_integer(),
+#&gt;   day = col_integer(),
+#&gt;   year = col_integer(),
+#&gt;   plot_id = col_integer(),
+#&gt;   species_id = col_character(),
+#&gt;   sex = col_character(),
+#&gt;   hindfoot_length = col_integer(),
+#&gt;   weight = col_integer(),
+#&gt;   genus = col_character(),
+#&gt;   species = col_character(),
+#&gt;   taxa = col_character(),
+#&gt;   plot_type = col_character()
+#&gt; )</code></pre>
+<p>This statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can see the contents of the data frame by typing its name: <code>surveys</code>.</p>
+<p>Wow… that was a lot of output. At least it means the data loaded properly. Let’s check the top (the first 6 lines) of this data frame using the function <code>head()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(surveys)</code></pre></div>
+<pre><code>#&gt; # A tibble: 6 x 13
+#&gt;   record_id month   day  year plot_id species_id sex   hindfoot_length
+#&gt;       &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;int&gt;
+#&gt; 1         1     7    16  1977       2 NL         M                  32
+#&gt; 2        72     8    19  1977       2 NL         M                  31
+#&gt; 3       224     9    13  1977       2 NL         &lt;NA&gt;               NA
+#&gt; 4       266    10    16  1977       2 NL         &lt;NA&gt;               NA
+#&gt; 5       349    11    12  1977       2 NL         &lt;NA&gt;               NA
+#&gt; 6       363    11    12  1977       2 NL         &lt;NA&gt;               NA
+#&gt; # ... with 5 more variables: weight &lt;int&gt;, genus &lt;chr&gt;, species &lt;chr&gt;,
+#&gt; #   taxa &lt;chr&gt;, plot_type &lt;chr&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Try also
+## View(surveys)</code></pre></div>
+</div>
+<div id="what-are-data-frames" class="section level2">
+<h2><span class="header-section-number">4.2</span> What are data frames?</h2>
+<p>Data frames are the <em>de facto</em> data structure for most tabular data, and what we use for statistics and plotting.</p>
+<p>A data frame can be created by hand, but most commonly they are generated by the functions <code>read_csv()</code> or <code>read.table()</code>; in other words, when importing spreadsheets from your hard drive (or the web).</p>
+<p>A data frame is the representation of data in the format of a table where the columns are vectors that all have the same length. Because columns are vectors, each column must contain a single type of data (e.g., characters, integers, factors). For example, here is a figure depicting a data frame comprising a numeric, a character, and a logical vector.</p>
+<div class="figure">
+<img src="img/data-frame.png" />
+
+</div>
+<p>We can see this when inspecting the <b>str</b>ucture of a data frame with the function <code>str()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys)</code></pre></div>
+</div>
+<div id="inspecting-data.frame-objects" class="section level2">
+<h2><span class="header-section-number">4.3</span> Inspecting <code>data.frame</code> Objects</h2>
+<p>We already saw how the functions <code>head()</code> and <code>str()</code> can be useful to check the content and the structure of a data frame. Here is a non-exhaustive list of functions to get a sense of the content/structure of the data. Let’s try them out!</p>
+<ul>
+<li>Size:
+<ul>
+<li><code>dim(surveys)</code> - returns a vector with the number of rows in the first element, and the number of columns as the second element (the <strong>dim</strong>ensions of the object)</li>
+<li><code>nrow(surveys)</code> - returns the number of rows</li>
+<li><code>ncol(surveys)</code> - returns the number of columns</li>
+</ul></li>
+<li>Content:
+<ul>
+<li><code>head(surveys)</code> - shows the first 6 rows</li>
+<li><code>tail(surveys)</code> - shows the last 6 rows</li>
+</ul></li>
+<li>Names:
+<ul>
+<li><code>names(surveys)</code> - returns the column names (synonym of <code>colnames()</code> for <code>data.frame</code> objects)</li>
+<li><code>rownames(surveys)</code> - returns the row names</li>
+</ul></li>
+<li>Summary:
+<ul>
+<li><code>str(surveys)</code> - structure of the object and information about the class, length and content of each column</li>
+<li><code>summary(surveys)</code> - summary statistics for each column</li>
+</ul></li>
+</ul>
+<p>Note: most of these functions are “generic”, they can be used on other types of objects besides <code>data.frame</code>.</p>
+<blockquote>
+<h3 id="challenge-3"><span class="header-section-number">4.3</span> Challenge</h3>
+<p>Based on the output of <code>str(surveys)</code>, can you answer the following questions?</p>
+<ul>
+<li>What is the class of the object <code>surveys</code>?</li>
+<li>How many rows and how many columns are in this object?</li>
+<li>How many species have been recorded during these surveys?</li>
+</ul>
+<div class="accordion">
+<h3 class="toc-ignore">
+Answer
+</h3>
+<div style="background: #fff;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys)</code></pre></div>
+<pre><code>#&gt; Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:  34786 obs. of  13 variables:
+#&gt;  $ record_id      : int  1 72 224 266 349 363 435 506 588 661 ...
+#&gt;  $ month          : int  7 8 9 10 11 11 12 1 2 3 ...
+#&gt;  $ day            : int  16 19 13 16 12 12 10 8 18 11 ...
+#&gt;  $ year           : int  1977 1977 1977 1977 1977 1977 1977 1978 1978 1978 ...
+#&gt;  $ plot_id        : int  2 2 2 2 2 2 2 2 2 2 ...
+#&gt;  $ species_id     : chr  &quot;NL&quot; &quot;NL&quot; &quot;NL&quot; &quot;NL&quot; ...
+#&gt;  $ sex            : chr  &quot;M&quot; &quot;M&quot; NA NA ...
+#&gt;  $ hindfoot_length: int  32 31 NA NA NA NA NA NA NA NA ...
+#&gt;  $ weight         : int  NA NA NA NA NA NA NA NA 218 NA ...
+#&gt;  $ genus          : chr  &quot;Neotoma&quot; &quot;Neotoma&quot; &quot;Neotoma&quot; &quot;Neotoma&quot; ...
+#&gt;  $ species        : chr  &quot;albigula&quot; &quot;albigula&quot; &quot;albigula&quot; &quot;albigula&quot; ...
+#&gt;  $ taxa           : chr  &quot;Rodent&quot; &quot;Rodent&quot; &quot;Rodent&quot; &quot;Rodent&quot; ...
+#&gt;  $ plot_type      : chr  &quot;Control&quot; &quot;Control&quot; &quot;Control&quot; &quot;Control&quot; ...
+#&gt;  - attr(*, &quot;spec&quot;)=List of 2
+#&gt;   ..$ cols   :List of 13
+#&gt;   .. ..$ record_id      : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+#&gt;   .. ..$ month          : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+#&gt;   .. ..$ day            : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+#&gt;   .. ..$ year           : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+#&gt;   .. ..$ plot_id        : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+#&gt;   .. ..$ species_id     : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+#&gt;   .. ..$ sex            : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+#&gt;   .. ..$ hindfoot_length: list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+#&gt;   .. ..$ weight         : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+#&gt;   .. ..$ genus          : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+#&gt;   .. ..$ species        : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+#&gt;   .. ..$ taxa           : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+#&gt;   .. ..$ plot_type      : list()
+#&gt;   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+#&gt;   ..$ default: list()
+#&gt;   .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_guess&quot; &quot;collector&quot;
+#&gt;   ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## * class: data frame
+## * how many rows: 34786,  how many columns: 13
+## * how many species: 48</code></pre></div>
+</div>
+</div>
+</blockquote>
+</div>
+<div id="indexing-and-subsetting-data-frames" class="section level2">
+<h2><span class="header-section-number">4.4</span> Indexing and subsetting data frames</h2>
+<p>Our survey data frame has rows and columns (it has 2 dimensions), if we want to extract some specific data from it, we need to specify the “coordinates” we want from it. Row numbers come first, followed by column numbers. However, note that different ways of specifying these coordinates lead to results with different classes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first element in the first column of the data frame (as a vector)</span>
+surveys[<span class="dv">1</span>, <span class="dv">1</span>]   
+<span class="co"># first element in the 6th column (as a vector)</span>
+surveys[<span class="dv">1</span>, <span class="dv">6</span>]   
+<span class="co"># first column of the data frame (as a vector)</span>
+surveys[, <span class="dv">1</span>]    
+<span class="co"># first column of the data frame (as a data.frame)</span>
+surveys[<span class="dv">1</span>]      
+<span class="co"># first three elements in the 7th column (as a vector)</span>
+surveys[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">7</span>] 
+<span class="co"># the 3rd row of the data frame (as a data.frame)</span>
+surveys[<span class="dv">3</span>, ]    
+<span class="co"># equivalent to head_surveys &lt;- head(surveys)</span>
+head_surveys &lt;-<span class="st"> </span>surveys[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, ] </code></pre></div>
+<p><code>:</code> is a special function that creates numeric vectors of integers in increasing or decreasing order, test <code>1:10</code> and <code>10:1</code> for instance.</p>
+<p>You can also exclude certain indices of a data frame using the “<code>-</code>” sign:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys[, <span class="op">-</span><span class="dv">1</span>]          <span class="co"># The whole data frame, except the first column</span>
+surveys[<span class="op">-</span><span class="kw">c</span>(<span class="dv">7</span><span class="op">:</span><span class="dv">34786</span>), ] <span class="co"># Equivalent to head(surveys)</span></code></pre></div>
+<p>Data frames can be subset by calling indices (as shown previously), but also by calling their column names directly:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys[<span class="st">&quot;species_id&quot;</span>]       <span class="co"># Result is a data.frame</span>
+surveys[, <span class="st">&quot;species_id&quot;</span>]     <span class="co"># Result is a vector</span>
+surveys[[<span class="st">&quot;species_id&quot;</span>]]     <span class="co"># Result is a vector</span>
+surveys<span class="op">$</span>species_id          <span class="co"># Result is a vector</span></code></pre></div>
+<p>In RStudio, you can use the autocompletion feature to get the full and correct names of the columns.</p>
+</div>
+<div id="formatting-dates" class="section level2">
+<h2><span class="header-section-number">4.5</span> Formatting Dates</h2>
+<p>This next section is taken from Chapter 16 of Hadley Wickham and Garrett Grolemund’s book <a href="https://r4ds.had.co.nz/dates-and-times.html">R for Data Science</a> which is licensed under the <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/">Creative Commons Attribution-NonCommercial-NoDerivs 3.0</a> license.</p>
+<div id="introduction-1" class="section level3">
+<h3><span class="header-section-number">4.5.1</span> Introduction</h3>
+<p>This chapter will show you how to work with dates and times in R. At first glance, dates and times seem simple. You use them all the time in your regular life, and they don’t seem to cause much confusion. However, the more you learn about dates and times, the more complicated they seem to get. To warm up, try these three seemingly simple questions:</p>
+<p>Does every year have 365 days? Does every day have 24 hours? Does every minute have 60 seconds? I’m sure you know that not every year has 365 days, but do you know the full rule for determining if a year is a leap year? (It has three parts.) You might have remembered that many parts of the world use daylight savings time (DST), so that some days have 23 hours, and others have 25. You might not have known that some minutes have 61 seconds because every now and then leap seconds are added because the Earth’s rotation is gradually slowing down.</p>
+<p>Dates and times are hard because they have to reconcile two physical phenomena (the rotation of the Earth and its orbit around the sun) with a whole raft of geopolitical phenomena including months, time zones, and DST. This chapter won’t teach you every last detail about dates and times, but it will give you a solid grounding of practical skills that will help you with common data analysis challenges.</p>
+</div>
+<div id="prerequisites" class="section level3">
+<h3><span class="header-section-number">4.5.2</span> Prerequisites</h3>
+<p>This chapter will focus on the <strong>lubridate</strong> package, which makes it easier to work with dates and times in R. lubridate is not part of core tidyverse because you only need it when you’re working with dates/times. We will also need nycflights13 for practice data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(lubridate)</code></pre></div>
+<pre><code>#&gt; Warning: package &#39;lubridate&#39; was built under R version 3.4.4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&#39;nycflights13&#39;)</span>
+<span class="kw">library</span>(nycflights13)</code></pre></div>
+<pre><code>#&gt; Warning: package &#39;nycflights13&#39; was built under R version 3.4.4</code></pre>
+</div>
+</div>
+<div id="creating-datetimes" class="section level2">
+<h2><span class="header-section-number">4.6</span> Creating date/times</h2>
+<p>There are three types of date/time data that refer to an instant in time:</p>
+<ul>
+<li><p>A <strong>date</strong>. Tibbles print this as <code>&lt;date&gt;</code>.</p></li>
+<li><p>A <strong>time</strong> within a day. Tibbles print this as <code>&lt;time&gt;</code>.</p></li>
+<li><p>A <strong>date-time</strong> is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as <code>&lt;dttm&gt;</code>. Elsewhere in R these are called POSIXct, but I don’t think that’s a very useful name.</p></li>
+</ul>
+<p>In this chapter we are only going to focus on dates and date-times as R doesn’t have a native class for storing times. If you need one, you can use the <strong>hms</strong> package.</p>
+<p>You should always use the simplest possible data type that works for your needs. That means if you can use a date instead of a date-time, you should. Date-times are substantially more complicated because of the need to handle time zones, which we’ll come back to at the end of the chapter.</p>
+<p>To get the current date or date-time you can use <code>today()</code> or <code>now()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">today</span>()
+<span class="kw">now</span>()</code></pre></div>
+<p>Otherwise, there are three ways you’re likely to create a date/time:</p>
+<ul>
+<li>From a string.</li>
+<li>From individual date-time components.</li>
+<li>From an existing date/time object.</li>
+</ul>
+<p>They work as follows.</p>
+<div id="from-strings" class="section level3">
+<h3><span class="header-section-number">4.6.1</span> From strings</h3>
+<p>Date/time data often comes as strings. You’ve seen one approach to parsing strings into date-times in <a href="#readr-datetimes">date-times</a>. Another approach is to use the helpers provided by lubridate. They automatically work out the format once you specify the order of the component. To use them, identify the order in which year, month, and day appear in your dates, then arrange “y”, “m”, and “d” in the same order. That gives you the name of the lubridate function that will parse your date. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ymd</span>(<span class="st">&quot;2017-01-31&quot;</span>)
+<span class="kw">mdy</span>(<span class="st">&quot;January 31st, 2017&quot;</span>)
+<span class="kw">dmy</span>(<span class="st">&quot;31-Jan-2017&quot;</span>)</code></pre></div>
+<p>These functions also take unquoted numbers. This is the most concise way to create a single date/time object, as you might need when filtering date/time data. <code>ymd()</code> is short and unambiguous:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ymd</span>(<span class="dv">20170131</span>)</code></pre></div>
+<p><code>ymd()</code> and friends create dates. To create a date-time, add an underscore and one or more of “h”, “m”, and “s” to the name of the parsing function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ymd_hms</span>(<span class="st">&quot;2017-01-31 20:11:59&quot;</span>)
+<span class="kw">mdy_hm</span>(<span class="st">&quot;01/31/2017 08:01&quot;</span>)</code></pre></div>
+<p>You can also force the creation of a date-time from a date by supplying a timezone:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ymd</span>(<span class="dv">20170131</span>, <span class="dt">tz =</span> <span class="st">&quot;UTC&quot;</span>)</code></pre></div>
+</div>
+<div id="from-other-types" class="section level3">
+<h3><span class="header-section-number">4.6.2</span> From other types</h3>
+<p>You may want to switch between a date-time and a date. That’s the job of <code>as_datetime()</code> and <code>as_date()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_datetime</span>(<span class="kw">today</span>())
+<span class="kw">as_date</span>(<span class="kw">now</span>())</code></pre></div>
+<p>Sometimes you’ll get date/times as numeric offsets from the “Unix Epoch”, 1970-01-01. If the offset is in seconds, use <code>as_datetime()</code>; if it’s in days, use <code>as_date()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_datetime</span>(<span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span>)
+<span class="kw">as_date</span>(<span class="dv">365</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+</div>
+<div id="exercises" class="section level3">
+<h3><span class="header-section-number">4.6.3</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>What happens if you parse a string that contains invalid dates?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ymd</span>(<span class="kw">c</span>(<span class="st">&quot;2010-10-10&quot;</span>, <span class="st">&quot;bananas&quot;</span>))</code></pre></div></li>
+<li><p>What does the <code>tzone</code> argument to <code>today()</code> do? Why is it important?</p></li>
+<li><p>Use the appropriate lubridate function to parse each of the following dates:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> &quot;January 1, 2010&quot;</span>
+d2 &lt;-<span class="st"> &quot;2015-Mar-07&quot;</span>
+d3 &lt;-<span class="st"> &quot;06-Jun-2017&quot;</span>
+d4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;August 19 (2015)&quot;</span>, <span class="st">&quot;July 1 (2015)&quot;</span>)
+d5 &lt;-<span class="st"> &quot;12/30/14&quot;</span> <span class="co"># Dec 30, 2014</span></code></pre></div></li>
+</ol>
+</div>
+</div>
+<div id="date-time-components" class="section level2">
+<h2><span class="header-section-number">4.7</span> Date-time components</h2>
+<p>Now that you know how to get date-time data into R’s date-time data structures, let’s explore what you can do with them. This section will focus on the accessor functions that let you get and set individual components. The next section will look at how arithmetic works with date-times.</p>
+<div id="getting-components" class="section level3">
+<h3><span class="header-section-number">4.7.1</span> Getting components</h3>
+<p>You can pull out individual parts of the date with the accessor functions <code>year()</code>, <code>month()</code>, <code>mday()</code> (day of the month), <code>yday()</code> (day of the year), <code>wday()</code> (day of the week), <code>hour()</code>, <code>minute()</code>, and <code>second()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datetime &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2016-07-08 12:34:56&quot;</span>)
+<span class="kw">year</span>(datetime)
+<span class="kw">month</span>(datetime)
+<span class="kw">mday</span>(datetime)
+<span class="kw">yday</span>(datetime)
+<span class="kw">wday</span>(datetime)</code></pre></div>
+<p>For <code>month()</code> and <code>wday()</code> you can set <code>label = TRUE</code> to return the abbreviated name of the month or day of the week. Set <code>abbr = FALSE</code> to return the full name.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">month</span>(datetime, <span class="dt">label =</span> <span class="ot">TRUE</span>)
+<span class="kw">wday</span>(datetime, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">abbr =</span> <span class="ot">FALSE</span>)</code></pre></div>
+</div>
+</div>
+<div id="time-spans" class="section level2">
+<h2><span class="header-section-number">4.8</span> Time spans</h2>
+<p>Next you’ll learn about how arithmetic with dates works, including subtraction, addition, and division. Along the way, you’ll learn about three important classes that represent time spans:</p>
+<ul>
+<li><strong>durations</strong>, which represent an exact number of seconds.</li>
+<li><strong>periods</strong>, which represent human units like weeks and months.</li>
+<li><strong>intervals</strong>, which represent a starting and ending point.</li>
+</ul>
+<div id="durations" class="section level3">
+<h3><span class="header-section-number">4.8.1</span> Durations</h3>
+<p>In R, when you subtract two dates, you get a difftime object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># How old is Hadley?</span>
+h_age &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">-</span><span class="st"> </span><span class="kw">ymd</span>(<span class="dv">19791014</span>)
+h_age</code></pre></div>
+<p>For more see <a href="https://r4ds.had.co.nz/dates-and-times.html">R for Data Science</a>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro-to-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="manipulating-and-analyzing-data-with-dplyr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["R-Intro-Hakai.pdf", "R-Intro-Hakai.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
